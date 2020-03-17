@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
-from django.urls import  reverse
+from django.urls import reverse
 
 
 class AdminSiteTests(TestCase):
@@ -9,14 +9,14 @@ class AdminSiteTests(TestCase):
         """Test create admin and user test"""
         self.client = Client()
         self.admin_user = get_user_model().objects.create_superuser(
-            email = 'admin@cldev.it',
-            password = 'admin123'
+            email='admin@cldev.it',
+            password='admin123'
         )
         self.client.force_login(self.admin_user)
         self.user = get_user_model().objects.create_user(
-            email = 'test@cldev.it',
-            password = 'test123',
-            name = 'Test User',
+            email='test@cldev.it',
+            password='test123',
+            name='Test User',
         )
 
     def test_users_listed(self):
@@ -35,10 +35,8 @@ class AdminSiteTests(TestCase):
         self.assertEqual(res.status_code, 200)
 
     def test_create_user_page(self):
-            """Test user create page"""
-            url = reverse('admin:core_user_add')
-            res = self.client.get(url)
+        """Test user create page"""
+        url = reverse('admin:core_user_add')
+        res = self.client.get(url)
 
-            self.assertEqual(res.status_code, 200)
-
-
+        self.assertEqual(res.status_code, 200)
